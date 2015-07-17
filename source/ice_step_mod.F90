@@ -174,7 +174,7 @@
           flw, fsnow, fpond, sss, mlt_onset, frz_onset, faero_atm, faero_ocn, &
           frain, Tair, coszen, strairxT, strairyT, fsurf, fcondtop, fsens, &
           flat, fswabs, flwout, evap, Tref, Qref, Uref, fresh, fsalt, fhocn, &
-          fswthru, meltt, melts, meltb, meltl, congel, snoice, &
+          fswthru, fswthruvdr, fswthruvdf, meltt, melts, meltb, meltl, congel, snoice, &
           set_sfcflux, merge_fluxes
       use ice_firstyear, only: update_FYarea
       use ice_grid, only: lmask_n, lmask_s, TLAT, TLON
@@ -183,7 +183,7 @@
       use ice_meltpond_lvl, only: compute_ponds_lvl, ffracn, dhsn, &
           rfracmin, rfracmax, dpscale, pndaspect, frzpnd
       use ice_meltpond_topo, only: compute_ponds_topo
-      use ice_shortwave, only: fswsfcn, fswintn, fswthrun, &
+      use ice_shortwave, only: fswsfcn, fswintn, fswthrun, fswthrunvdr, fswthrunvdf, &
                                Sswabsn, Iswabsn, shortwave
       use ice_state, only: aice, aicen, aice_init, aicen_init, vicen_init, &
           vice, vicen, vsno, vsnon, ntrcr, trcrn, &
@@ -676,6 +676,7 @@
                             Trefn,              Qrefn,                &
                             freshn,             fsaltn,               &
                             fhocnn,             fswthrun(:,:,n,iblk), &
+                            fswthrunvdr(:,:,n,iblk), fswthrunvdf(:,:,n,iblk), &
                             strairxT(:,:,iblk), strairyT  (:,:,iblk), &
                             Cdn_atm_ratio(:,:,iblk),                  &
                             fsurf   (:,:,iblk), fcondtop  (:,:,iblk), &
@@ -685,6 +686,7 @@
                             Tref    (:,:,iblk), Qref      (:,:,iblk), &
                             fresh   (:,:,iblk), fsalt     (:,:,iblk), &
                             fhocn   (:,:,iblk), fswthru   (:,:,iblk), &
+                            fswthruvdr   (:,:,iblk), fswthruvdf   (:,:,iblk), &
                             melttn(:,:,n,iblk), meltsn  (:,:,n,iblk), &
                             meltbn(:,:,n,iblk), congeln (:,:,n,iblk), &
                             snoicen(:,:,n,iblk),                      &
@@ -1358,6 +1360,7 @@
       use ice_meltpond_lvl, only: ffracn, dhsn
       use ice_meltpond_topo, only: hp1 
       use ice_shortwave, only: fswsfcn, fswintn, fswthrun, fswpenln, &
+                              fswthrunvdr, fswthrunvdf, &
                                Sswabsn, Iswabsn, shortwave, &
                                albicen, albsnon, albpndn, &
                                alvdrn, alidrn, alvdfn, alidfn, &
@@ -1396,6 +1399,8 @@
          fswsfcn(i,j,n,iblk) = c0
          fswintn(i,j,n,iblk) = c0
          fswthrun(i,j,n,iblk) = c0
+         fswthrunvdr(i,j,n,iblk) = c0
+         fswthrunvdf(i,j,n,iblk) = c0
       enddo   ! i
       enddo   ! j
       enddo   ! ncat
@@ -1424,7 +1429,9 @@
                        alvdrn(:,:,:,iblk),    alvdfn(:,:,:,iblk),      &
                        alidrn(:,:,:,iblk),    alidfn(:,:,:,iblk),      &
                        fswsfcn(:,:,:,iblk),   fswintn(:,:,:,iblk),     &
-                       fswthrun(:,:,:,iblk),  fswpenln(:,:,:,:,iblk),  &
+                       fswthrun(:,:,:,iblk),  fswthrunvdr(:,:,:,iblk), &
+                       fswthrunvdf(:,:,:,iblk), &
+                       fswpenln(:,:,:,:,iblk),  &
                        Sswabsn(:,:,:,:,iblk), Iswabsn(:,:,:,:,iblk),   &
                        albicen(:,:,:,iblk),   albsnon(:,:,:,iblk),     &
                        albpndn(:,:,:,iblk),   apeffn(:,:,:,iblk),      &
@@ -1443,6 +1450,8 @@
                               alvdfn(:,:,:,iblk),  alidfn(:,:,:,iblk),  &
                               fswsfcn(:,:,:,iblk), fswintn(:,:,:,iblk), &
                               fswthrun(:,:,:,iblk),                     &
+                              fswthrunvdr(:,:,:,iblk),                     &
+                              fswthrunvdf(:,:,:,iblk),                     &
                               fswpenln(:,:,:,:,iblk),                   &
                               Iswabsn(:,:,:,:,iblk),                    &
                               Sswabsn(:,:,:,:,iblk),                    &
