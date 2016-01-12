@@ -155,8 +155,8 @@
   , fyear_init      = 1958
   , ycycle          = 52
   , atm_data_format = 'bin'
-  , atm_data_type   = 'LYq'
-  , atm_data_dir    = '/usr/projects/climate/eclare/DATA/gx1v3/LargeYeager/v2_updated/'
+  , atm_data_type   = 'none'
+  , atm_data_dir    = '/glade/scratch/feiliu/CICE.v5.1/rundir/'
   , calc_strair     = .true.
   , highfreq        = .false.
   , natmiter        = 5
@@ -168,9 +168,9 @@
   , l_mpond_fresh   = .false.
   , tfrz_option     = 'mushy'
   , oceanmixed_ice  = .true.
-  , ocn_data_format = 'nc'
-  , sss_data_type   = 'ncar'
-  , sst_data_type   = 'ncar'
+  , ocn_data_format = 'bin'
+  , sss_data_type   = 'default'
+  , sst_data_type   = 'default'
   , ocn_data_dir    = '/usr/projects/climate/eclare/DATA/gx1v3/gx1v3/forcing/'
   , oceanmixed_file = 'oceanmixed_ice_depth.nc'
   , restore_sst     = .false.
