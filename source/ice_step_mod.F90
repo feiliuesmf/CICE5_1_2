@@ -39,8 +39,8 @@
       use ice_fileunits, only: nu_diag
       use ice_flux, only: scale_factor, swvdr, swvdf, swidr, swidf, &
           alvdr_ai, alvdf_ai, alidr_ai, alidf_ai, fswfac, coszen
-      use ice_shortwave, only: fswsfcn, fswintn, fswthrun, fswpenln, &
-                               Sswabsn, Iswabsn
+      use ice_shortwave, only: fswsfcn, fswintn, fswthrun, fsthrunvdr, &
+                               vswthrunvdf, fswpenln, Sswabsn, Iswabsn
       use ice_state, only: aice, aicen
       use ice_timers, only: ice_timer_start, ice_timer_stop, timer_sw
 
@@ -124,6 +124,8 @@
                fswsfcn(i,j,n,iblk)  = scale_factor(i,j,iblk)*fswsfcn (i,j,n,iblk)
                fswintn(i,j,n,iblk)  = scale_factor(i,j,iblk)*fswintn (i,j,n,iblk)
                fswthrun(i,j,n,iblk) = scale_factor(i,j,iblk)*fswthrun(i,j,n,iblk)
+               fswthrunvdr(i,j,n,iblk) = scale_factor(i,j,iblk)*fswthrunvdr(i,j,n,iblk)
+               fswthrunvdf(i,j,n,iblk) = scale_factor(i,j,iblk)*fswthrunvdf(i,j,n,iblk)
                do k = 1,nilyr+1
                   fswpenln(i,j,k,n,iblk) &
                                     = scale_factor(i,j,iblk)*fswpenln(i,j,k,n,iblk)
