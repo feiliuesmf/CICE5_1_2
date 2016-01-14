@@ -39,8 +39,8 @@
       use ice_fileunits, only: nu_diag
       use ice_flux, only: scale_factor, swvdr, swvdf, swidr, swidf, &
           alvdr_ai, alvdf_ai, alidr_ai, alidf_ai, fswfac, coszen
-      use ice_shortwave, only: fswsfcn, fswintn, fswthrun, fsthrunvdr, &
-                               vswthrunvdf, fswpenln, Sswabsn, Iswabsn
+      use ice_shortwave, only: fswsfcn, fswintn, fswthrun, fswthrunvdr, &
+                               fswthrunvdf, fswpenln, Sswabsn, Iswabsn
       use ice_state, only: aice, aicen
       use ice_timers, only: ice_timer_start, ice_timer_stop, timer_sw
 
